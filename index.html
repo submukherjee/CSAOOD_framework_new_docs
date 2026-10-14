@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSAOOD documentation &mdash; CSAOOD 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2caa9db7"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            CSAOOD
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Alignment methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Distance and clustering workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line.html">Command line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Example notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications and contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">CSAOOD</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CSAOOD documentation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="csaood-documentation">
+<h1>CSAOOD documentation<a class="headerlink" href="#csaood-documentation" title="Link to this heading"></a></h1>
+<p>CSAOOD aligns univariate, multivariate, and multimodal cyclic waveform
+records, constructs registered distance matrices, and clusters the resulting
+observations without using event labels or event-region tags.</p>
+<img alt="Trend-corrected cyclic alignment" class="align-center" src="_images/alignment_with_boundary_correction.gif" />
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">User guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#documentation-hosting">Documentation hosting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Alignment methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#method-1-exhaustive-cyclic-alignment">Method 1: exhaustive cyclic alignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#method-2-trend-corrected-cyclic-alignment">Method 2: trend-corrected cyclic alignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#method-3-fft-alignment-on-original-signals">Method 3: FFT alignment on original signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#method-4-fft-alignment-on-differences">Method 4: FFT alignment on differences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#method-5-no-alignment">Method 5: no alignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#offset-convention">Offset convention</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Distance and clustering workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html#gpu-parallelization">GPU parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html#default-clustering">Default clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html#optional-mds-ward-clustering">Optional MDS/Ward clustering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command_line.html">Command line</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#trend-corrected-example">Trend-corrected example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#fft-difference-example">FFT-difference example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#unified-command">Unified command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#saved-outputs">Saved outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Example notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks.html#trend-corrected-example">Trend-corrected example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks.html#fft-difference-example">FFT-difference example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications and contributors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="publications.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="publications.html#conference-paper">Conference paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="publications.html#manuscript-under-preparation">Manuscript under preparation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-csaood.alignment">Alignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-csaood.corrections">Edge correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-csaood.matrices">Distance matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-csaood.clustering">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-csaood.visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-csaood.io">Input and output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-csaood.pipeline">High-level pipeline</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="key-design-guarantees">
+<h2>Key design guarantees<a class="headerlink" href="#key-design-guarantees" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Positive offsets always mean a right shift, following <code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.roll()</span></code>.</p></li>
+<li><p>Trend correction is evaluated before scoring every candidate offset.</p></li>
+<li><p>No tag column is read by the package.</p></li>
+<li><p>Agglomerative clustering on precomputed distances is the default.</p></li>
+<li><p>Plot functions do not force a backend, so they work in notebooks and on
+headless servers.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

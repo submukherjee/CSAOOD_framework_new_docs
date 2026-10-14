@@ -1,0 +1,166 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Command line &mdash; CSAOOD 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2caa9db7"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Example notebooks" href="notebooks.html" />
+    <link rel="prev" title="Distance and clustering workflow" href="workflow.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CSAOOD
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Alignment methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Distance and clustering workflow</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command line</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#trend-corrected-example">Trend-corrected example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fft-difference-example">FFT-difference example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unified-command">Unified command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#saved-outputs">Saved outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Example notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications and contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CSAOOD</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Command line</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="command-line">
+<h1>Command line<a class="headerlink" href="#command-line" title="Link to this heading"></a></h1>
+<p>All run scripts share the same interface. Display all options with <code class="docutils literal notranslate"><span class="pre">--help</span></code>.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">run_scripts</span><span class="p">\</span><span class="n">run_method1_cyclic</span><span class="p">.</span><span class="n">py</span> <span class="p">-</span><span class="n">-help</span>
+</pre></div>
+</div>
+<section id="trend-corrected-example">
+<h2>Trend-corrected example<a class="headerlink" href="#trend-corrected-example" title="Link to this heading"></a></h2>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">run_scripts</span><span class="p">\</span><span class="n">run_method2_trend_corrected</span><span class="p">.</span><span class="n">py</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-input-dir</span> <span class="n">input_files</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-output-dir</span> <span class="n">results</span><span class="p">\</span><span class="n">trend_corrected</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-channels</span> <span class="n">acceleration_x</span> <span class="n">acceleration_y</span> <span class="n">acceleration_z</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-offset-step</span> <span class="n">100</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-search-type</span> <span class="n">fast_symmetric</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-correction-mode</span> <span class="n">whole_wrapped_level</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-correction-window</span> <span class="n">1000</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-pair-direction-mode</span> <span class="n">one_way</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-gpu-ids</span> <span class="n">auto</span>
+</pre></div>
+</div>
+</section>
+<section id="fft-difference-example">
+<h2>FFT-difference example<a class="headerlink" href="#fft-difference-example" title="Link to this heading"></a></h2>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">run_scripts</span><span class="p">\</span><span class="n">run_method4_fft_difference</span><span class="p">.</span><span class="n">py</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-channels</span> <span class="n">sensor_x</span> <span class="n">sensor_y</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-difference-lag</span> <span class="n">1000</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-fft-cost-normalization</span> <span class="n">squared_sum</span>
+</pre></div>
+</div>
+<p>Omit <code class="docutils literal notranslate"><span class="pre">--clusters</span></code> to select the cluster count by silhouette score. Supplying
+<code class="docutils literal notranslate"><span class="pre">--clusters</span> <span class="pre">K</span></code> fixes the top-level count at <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p>
+</section>
+<section id="unified-command">
+<h2>Unified command<a class="headerlink" href="#unified-command" title="Link to this heading"></a></h2>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">-m</span> <span class="n">csaood</span> <span class="p">-</span><span class="n">-method</span> <span class="n">fft_original</span> <span class="p">-</span><span class="n">-channels</span> <span class="n">sensor_x</span> <span class="n">sensor_y</span>
+</pre></div>
+</div>
+<p>Results are placed under <code class="docutils literal notranslate"><span class="pre">results/&lt;method&gt;</span></code> unless <code class="docutils literal notranslate"><span class="pre">--output-dir</span></code> is supplied.</p>
+</section>
+<section id="saved-outputs">
+<h2>Saved outputs<a class="headerlink" href="#saved-outputs" title="Link to this heading"></a></h2>
+<p>Each run saves <code class="docutils literal notranslate"><span class="pre">distance_matrix_all.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">offset_matrix_all.csv</span></code>, independent
+per-channel distance and offset matrices, clustering assignments, silhouette
+scores, heatmaps, run settings, and runtime logs. Distance matrices are not
+duplicated under a similarity-matrix filename.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">--subcluster-depth</span> <span class="pre">N</span></code> to request <code class="docutils literal notranslate"><span class="pre">N</span></code> nested within-cluster levels. The
+default is one; zero disables subclustering.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="workflow.html" class="btn btn-neutral float-left" title="Distance and clustering workflow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="notebooks.html" class="btn btn-neutral float-right" title="Example notebooks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,771 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API reference &mdash; CSAOOD 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2caa9db7"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Publications and contributors" href="publications.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CSAOOD
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Alignment methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Distance and clustering workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line.html">Command line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Example notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications and contributors</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-csaood.alignment">Alignment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.alignment.align_pair"><code class="docutils literal notranslate"><span class="pre">align_pair()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.alignment.build_offsets"><code class="docutils literal notranslate"><span class="pre">build_offsets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.alignment.exhaustive_align"><code class="docutils literal notranslate"><span class="pre">exhaustive_align()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.alignment.fft_align"><code class="docutils literal notranslate"><span class="pre">fft_align()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-csaood.corrections">Edge correction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.corrections.apply_level_correction"><code class="docutils literal notranslate"><span class="pre">apply_level_correction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-csaood.matrices">Distance matrices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.matrices.compute_distance_matrices"><code class="docutils literal notranslate"><span class="pre">compute_distance_matrices()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.matrices.compute_folder_distance_matrices_parallel"><code class="docutils literal notranslate"><span class="pre">compute_folder_distance_matrices_parallel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.matrices.prepare_signal_memmap"><code class="docutils literal notranslate"><span class="pre">prepare_signal_memmap()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-csaood.clustering">Clustering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.clustering.ClusteringResult"><code class="docutils literal notranslate"><span class="pre">ClusteringResult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.clustering.agglomerative_cluster"><code class="docutils literal notranslate"><span class="pre">agglomerative_cluster()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.clustering.mds_ward_cluster"><code class="docutils literal notranslate"><span class="pre">mds_ward_cluster()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.clustering.recursive_subcluster"><code class="docutils literal notranslate"><span class="pre">recursive_subcluster()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.clustering.save_clustering_result"><code class="docutils literal notranslate"><span class="pre">save_clustering_result()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-csaood.visualization">Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.visualization.plot_alignment"><code class="docutils literal notranslate"><span class="pre">plot_alignment()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.visualization.plot_alignment_cost"><code class="docutils literal notranslate"><span class="pre">plot_alignment_cost()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.visualization.plot_cluster_scores"><code class="docutils literal notranslate"><span class="pre">plot_cluster_scores()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.visualization.plot_distance_heatmap"><code class="docutils literal notranslate"><span class="pre">plot_distance_heatmap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.visualization.style_axes"><code class="docutils literal notranslate"><span class="pre">style_axes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-csaood.io">Input and output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.io.load_csv_signals"><code class="docutils literal notranslate"><span class="pre">load_csv_signals()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.io.load_distance_matrix"><code class="docutils literal notranslate"><span class="pre">load_distance_matrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.io.save_distance_matrices"><code class="docutils literal notranslate"><span class="pre">save_distance_matrices()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.io.trim_to_common_length"><code class="docutils literal notranslate"><span class="pre">trim_to_common_length()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-csaood.pipeline">High-level pipeline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.pipeline.run_pipeline"><code class="docutils literal notranslate"><span class="pre">run_pipeline()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CSAOOD</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API reference</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<section id="module-csaood.alignment">
+<span id="alignment"></span><h2>Alignment<a class="headerlink" href="#module-csaood.alignment" title="Link to this heading"></a></h2>
+<p>Pairwise waveform alignment algorithms.</p>
+<p>All public functions use one offset convention: a positive offset moves the
+moving waveform to the right, as in <code class="docutils literal notranslate"><span class="pre">numpy.roll(moving,</span> <span class="pre">offset,</span> <span class="pre">axis=0)</span></code>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.alignment.align_pair">
+<span class="sig-prename descclassname"><span class="pre">csaood.alignment.</span></span><span class="sig-name descname"><span class="pre">align_pair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moving</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">AlignmentMethod.CYCLIC</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.alignment.align_pair" title="Link to this definition"></a></dt>
+<dd><p>Align one waveform pair using any public CSAOOD method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference</strong> (<em>ndarray</em><em> | </em><em>Tensor</em>) – Reference waveform.</p></li>
+<li><p><strong>moving</strong> (<em>ndarray</em><em> | </em><em>Tensor</em>) – Waveform to align.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em> | </em><em>AlignmentMethod</em>) – One of <code class="docutils literal notranslate"><span class="pre">cyclic</span></code>, <code class="docutils literal notranslate"><span class="pre">trend_corrected</span></code>, <code class="docutils literal notranslate"><span class="pre">fft_original</span></code>,
+<code class="docutils literal notranslate"><span class="pre">fft_difference</span></code>, or <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> – Method-specific keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Alignment result.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>AlignmentResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.alignment.build_offsets">
+<span class="sig-prename descclassname"><span class="pre">csaood.alignment.</span></span><span class="sig-name descname"><span class="pre">build_offsets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fast_symmetric'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.alignment.build_offsets" title="Link to this definition"></a></dt>
+<dd><p>Build a deterministic grid of signed cyclic offsets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<em>int</em>) – Number of waveform samples.</p></li>
+<li><p><strong>step</strong> (<em>int</em>) – Positive spacing between tested offsets.</p></li>
+<li><p><strong>search_type</strong> (<em>str</em>) – One of <code class="docutils literal notranslate"><span class="pre">right_only</span></code>, <code class="docutils literal notranslate"><span class="pre">left_only</span></code>,
+<code class="docutils literal notranslate"><span class="pre">fast_symmetric</span></code>, or <code class="docutils literal notranslate"><span class="pre">symmetric</span></code>. The two symmetric choices
+cover one nonduplicated cycle; <code class="docutils literal notranslate"><span class="pre">fast_symmetric</span></code> is retained as a
+familiar name from the original software.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Sorted unique signed offsets containing zero.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.alignment.exhaustive_align">
+<span class="sig-prename descclassname"><span class="pre">csaood.alignment.</span></span><span class="sig-name descname"><span class="pre">exhaustive_align</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moving</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fast_symmetric'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'squared'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correction_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">CorrectionMode.NONE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correction_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset_chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_aligned</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_cost_curve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.alignment.exhaustive_align" title="Link to this definition"></a></dt>
+<dd><p>Align a waveform by explicitly evaluating a grid of cyclic shifts.</p>
+<p>Edge correction, when requested, is applied to every candidate shift before
+its cost is evaluated. This ordering is essential because correction can
+change which shift minimizes the distance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference</strong> (<em>ndarray</em><em> | </em><em>Tensor</em>) – Reference waveform with shape <code class="docutils literal notranslate"><span class="pre">(samples,</span> <span class="pre">channels)</span></code>.</p></li>
+<li><p><strong>moving</strong> (<em>ndarray</em><em> | </em><em>Tensor</em>) – Waveform to align to <code class="docutils literal notranslate"><span class="pre">reference</span></code>.</p></li>
+<li><p><strong>offset_step</strong> (<em>int</em>) – Spacing between candidate shifts.</p></li>
+<li><p><strong>search_type</strong> (<em>str</em>) – Candidate offset range; see <a class="reference internal" href="#csaood.alignment.build_offsets" title="csaood.alignment.build_offsets"><code class="xref py py-func docutils literal notranslate"><span class="pre">build_offsets()</span></code></a>.</p></li>
+<li><p><strong>cost</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">squared</span></code> or <code class="docutils literal notranslate"><span class="pre">absolute</span></code>.</p></li>
+<li><p><strong>correction_mode</strong> (<em>str</em><em> | </em><em>CorrectionMode</em>) – Intercept-only correction strategy.</p></li>
+<li><p><strong>correction_window</strong> (<em>int</em>) – Local leading-window length.</p></li>
+<li><p><strong>offset_chunk_size</strong> (<em>int</em>) – Number of uncorrected shifts evaluated together.</p></li>
+<li><p><strong>return_aligned</strong> (<em>bool</em>) – Whether to return the complete aligned waveform.</p></li>
+<li><p><strong>return_cost_curve</strong> (<em>bool</em>) – Whether to return every candidate offset and cost.</p></li>
+<li><p><strong>device</strong> (<em>str</em><em> | </em><em>device</em><em> | </em><em>None</em>) – Torch device. <code class="docutils literal notranslate"><span class="pre">None</span></code> uses the input/default torch device.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Alignment result containing the global and channel-specific optima.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>AlignmentResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.alignment.fft_align">
+<span class="sig-prename descclassname"><span class="pre">csaood.alignment.</span></span><span class="sig-name descname"><span class="pre">fft_align</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moving</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">difference_lags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost_normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'squared_sum'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_aligned</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_cost_curve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.alignment.fft_align" title="Link to this definition"></a></dt>
+<dd><p>Align two waveforms using FFT-based circular correlation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference</strong> (<em>ndarray</em><em> | </em><em>Tensor</em>) – Reference waveform.</p></li>
+<li><p><strong>moving</strong> (<em>ndarray</em><em> | </em><em>Tensor</em>) – Waveform to align.</p></li>
+<li><p><strong>difference_lags</strong> (<em>int</em><em> | </em><em>Sequence</em><em>[</em><em>int</em><em>] </em><em>| </em><em>None</em>) – If provided, estimate offsets and distances from
+channel-wise lag differences. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, use the original signals.</p></li>
+<li><p><strong>cost_normalization</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">squared_sum</span></code> for consistency with exhaustive
+methods, or <code class="docutils literal notranslate"><span class="pre">legacy_msr</span></code> for the original FFT scripts’ mean
+squared residual scale.</p></li>
+<li><p><strong>return_aligned</strong> (<em>bool</em>) – Whether to return the complete aligned waveform.</p></li>
+<li><p><strong>return_cost_curve</strong> (<em>bool</em>) – Whether to return every cyclic cost.</p></li>
+<li><p><strong>device</strong> (<em>str</em><em> | </em><em>device</em><em> | </em><em>None</em>) – Torch device.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Alignment result. For differenced alignment, <code class="docutils literal notranslate"><span class="pre">aligned</span></code> is the original
+moving waveform shifted by the offset estimated from its differences.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>AlignmentResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-csaood.corrections">
+<span id="edge-correction"></span><h2>Edge correction<a class="headerlink" href="#module-csaood.corrections" title="Link to this heading"></a></h2>
+<p>Intercept-only corrections for cyclic wrap boundaries.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.corrections.apply_level_correction">
+<span class="sig-prename descclassname"><span class="pre">csaood.corrections.</span></span><span class="sig-name descname"><span class="pre">apply_level_correction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shifted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signed_shift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">CorrectionMode.WHOLE_WRAPPED_LEVEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.corrections.apply_level_correction" title="Link to this definition"></a></dt>
+<dd><p>Correct the level discontinuity created by a cyclic shift.</p>
+<p>The input must already equal <code class="docutils literal notranslate"><span class="pre">torch.roll(moving,</span> <span class="pre">signed_shift,</span> <span class="pre">dims=0)</span></code>.
+The cyclic shift is represented as a right shift of
+<code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">signed_shift</span> <span class="pre">mod</span> <span class="pre">M</span></code> samples, so the first <code class="docutils literal notranslate"><span class="pre">h</span></code> observations form the
+wrapped segment and the splice lies between indices <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">-</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">h</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">whole_wrapped_level</span></code> estimates the wrapped level from all first <code class="docutils literal notranslate"><span class="pre">h</span></code>
+samples. <code class="docutils literal notranslate"><span class="pre">local_seam_level</span></code> estimates it from at most <code class="docutils literal notranslate"><span class="pre">window</span></code> samples
+immediately before the splice. Both modes estimate the leading level from
+at most <code class="docutils literal notranslate"><span class="pre">window</span></code> samples immediately after the splice. The resulting
+constant is added to the complete wrapped prefix. No slope or taper is
+introduced.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shifted</strong> (<em>Tensor</em>) – Shifted waveform with shape <code class="docutils literal notranslate"><span class="pre">(samples,</span> <span class="pre">channels)</span></code>.</p></li>
+<li><p><strong>signed_shift</strong> (<em>int</em>) – Signed shift used to construct <code class="docutils literal notranslate"><span class="pre">shifted</span></code>. Positive
+values denote a right shift.</p></li>
+<li><p><strong>mode</strong> (<em>str</em><em> | </em><em>CorrectionMode</em>) – <code class="docutils literal notranslate"><span class="pre">whole_wrapped_level</span></code>, <code class="docutils literal notranslate"><span class="pre">local_seam_level</span></code>, or <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
+<li><p><strong>window</strong> (<em>int</em>) – Number of leading-side observations used for level estimation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A corrected copy of <code class="docutils literal notranslate"><span class="pre">shifted</span></code>. If no correction is required, the
+original tensor is returned.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the input shape, correction mode, or window is invalid.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Tensor</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-csaood.matrices">
+<span id="distance-matrices"></span><h2>Distance matrices<a class="headerlink" href="#module-csaood.matrices" title="Link to this heading"></a></h2>
+<p>Pairwise distance-matrix computation, including multi-GPU execution.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.matrices.compute_distance_matrices">
+<span class="sig-prename descclassname"><span class="pre">csaood.matrices.</span></span><span class="sig-name descname"><span class="pre">compute_distance_matrices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signals</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">AlignmentMethod.CYCLIC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pair_direction_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'one_way'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">alignment_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.matrices.compute_distance_matrices" title="Link to this definition"></a></dt>
+<dd><p>Compute all-channel and per-channel matrices in one process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signals</strong> (<em>list</em><em>[</em><em>ndarray</em><em>]</em>) – Waveforms with shape <code class="docutils literal notranslate"><span class="pre">(samples,</span> <span class="pre">channels)</span></code>.</p></li>
+<li><p><strong>file_names</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – Optional labels for the waveforms.</p></li>
+<li><p><strong>channel_names</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – Optional labels for channels.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em> | </em><em>AlignmentMethod</em>) – Alignment method.</p></li>
+<li><p><strong>pair_direction_mode</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">one_way</span></code> or <code class="docutils literal notranslate"><span class="pre">bidirectional_min</span></code>. The latter is
+useful for asymmetric trend correction and approximately doubles
+computation.</p></li>
+<li><p><strong>device</strong> (<em>str</em><em> | </em><em>device</em><em> | </em><em>None</em>) – Torch device.</p></li>
+<li><p><strong>**alignment_kwargs</strong> – Arguments forwarded to <code class="xref py py-func docutils literal notranslate"><span class="pre">csaood.align_pair()</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pairwise distance and offset matrices.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>DistanceMatrices</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.matrices.compute_folder_distance_matrices_parallel">
+<span class="sig-prename descclassname"><span class="pre">csaood.matrices.</span></span><span class="sig-name descname"><span class="pre">compute_folder_distance_matrices_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_names</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">AlignmentMethod.CYCLIC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pair_direction_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'one_way'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpu_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">alignment_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.matrices.compute_folder_distance_matrices_parallel" title="Link to this definition"></a></dt>
+<dd><p>Compute distance matrices from CSV files using one process per GPU.</p>
+<p>The parent process creates a shared read-only memory map. Each worker owns
+one GPU and a disjoint collection of unordered pairs, writes an NPZ partial
+result, and communicates only when all workers have completed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dir</strong> (<em>str</em><em> | </em><em>Path</em>) – Directory containing waveform CSV files.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em> | </em><em>Path</em>) – Root directory for matrices, logs, and partial results.</p></li>
+<li><p><strong>channel_names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – Ordered sensor columns used for alignment.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em> | </em><em>AlignmentMethod</em>) – One of the public alignment methods.</p></li>
+<li><p><strong>pair_direction_mode</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">one_way</span></code> or <code class="docutils literal notranslate"><span class="pre">bidirectional_min</span></code>.</p></li>
+<li><p><strong>gpu_ids</strong> (<em>str</em><em> | </em><em>list</em><em>[</em><em>int</em><em>] </em><em>| </em><em>None</em>) – <code class="docutils literal notranslate"><span class="pre">auto</span></code>, <code class="docutils literal notranslate"><span class="pre">cpu</span></code>, a comma-separated device list, or an
+explicit list of CUDA device indices.</p></li>
+<li><p><strong>max_files</strong> (<em>int</em><em> | </em><em>None</em>) – Optional number of alphabetically sorted files to process.</p></li>
+<li><p><strong>**alignment_kwargs</strong> – Method-specific options forwarded to
+<code class="xref py py-func docutils literal notranslate"><span class="pre">csaood.align_pair()</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Combined and independently optimized per-channel
+distance and offset matrices.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DistanceMatrices</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.matrices.prepare_signal_memmap">
+<span class="sig-prename descclassname"><span class="pre">csaood.matrices.</span></span><span class="sig-name descname"><span class="pre">prepare_signal_memmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_names</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.matrices.prepare_signal_memmap" title="Link to this definition"></a></dt>
+<dd><p>Convert selected CSV columns to a shared float32 memory map.</p>
+<p>Complete selected-channel rows are retained from each file, after which
+all waveforms are trimmed to the shortest retained length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dir</strong> (<em>str</em><em> | </em><em>Path</em>) – Directory containing waveform CSV files.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em> | </em><em>Path</em>) – Directory for the memory map and input metadata.</p></li>
+<li><p><strong>channel_names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – Ordered numeric columns to extract.</p></li>
+<li><p><strong>max_files</strong> (<em>int</em><em> | </em><em>None</em>) – Optional number of alphabetically sorted files to use.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Memory-map path, array shape, file names, channel
+names, and input-selection metadata.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, Any]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If fewer than two CSV files are selected.</p></li>
+<li><p><strong>ValueError</strong> – If channels are missing or contain insufficient data.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-csaood.clustering">
+<span id="clustering"></span><h2>Clustering<a class="headerlink" href="#module-csaood.clustering" title="Link to this heading"></a></h2>
+<p>Clustering methods for precomputed waveform distance matrices.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="csaood.clustering.ClusteringResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">csaood.clustering.</span></span><span class="sig-name descname"><span class="pre">ClusteringResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.clustering.ClusteringResult" title="Link to this definition"></a></dt>
+<dd><p>Labels and diagnostics returned by a clustering method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>cluster_count</strong> (<em>int</em>)</p></li>
+<li><p><strong>scores</strong> (<em>DataFrame</em>)</p></li>
+<li><p><strong>method</strong> (<em>str</em>)</p></li>
+<li><p><strong>embedding</strong> (<em>ndarray</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>metadata</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.clustering.agglomerative_cluster">
+<span class="sig-prename descclassname"><span class="pre">csaood.clustering.</span></span><span class="sig-name descname"><span class="pre">agglomerative_cluster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance_matrix</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linkage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_cluster_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.clustering.agglomerative_cluster" title="Link to this definition"></a></dt>
+<dd><p>Cluster a precomputed matrix using agglomerative hierarchical clustering.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">cluster_count</span></code> is omitted, the number of clusters maximizing the
+precomputed-distance silhouette score is selected. Candidate partitions
+violating <code class="docutils literal notranslate"><span class="pre">minimum_cluster_size</span></code> are excluded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distance_matrix</strong> (<em>ndarray</em>) – Symmetric precomputed distance matrix.</p></li>
+<li><p><strong>cluster_count</strong> (<em>int</em><em> | </em><em>None</em>) – Fixed number of clusters, or <code class="docutils literal notranslate"><span class="pre">None</span></code> for selection.</p></li>
+<li><p><strong>maximum_clusters</strong> (<em>int</em>) – Largest candidate when selecting cluster count.</p></li>
+<li><p><strong>linkage</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">single</span></code>, <code class="docutils literal notranslate"><span class="pre">complete</span></code>, or <code class="docutils literal notranslate"><span class="pre">average</span></code>.</p></li>
+<li><p><strong>minimum_cluster_size</strong> (<em>int</em>) – Smallest admissible cluster during selection.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Clustering labels and silhouette diagnostics.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#csaood.clustering.ClusteringResult" title="csaood.clustering.ClusteringResult"><em>ClusteringResult</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.clustering.mds_ward_cluster">
+<span class="sig-prename descclassname"><span class="pre">csaood.clustering.</span></span><span class="sig-name descname"><span class="pre">mds_ward_cluster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance_matrix</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.clustering.mds_ward_cluster" title="Link to this definition"></a></dt>
+<dd><p>Embed pairwise distances with metric MDS and apply Ward clustering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distance_matrix</strong> (<em>ndarray</em>) – Symmetric precomputed distance matrix.</p></li>
+<li><p><strong>embedding_dimensions</strong> (<em>int</em>) – Requested number of metric-MDS coordinates.</p></li>
+<li><p><strong>cluster_count</strong> (<em>int</em><em> | </em><em>None</em>) – Fixed cluster count, or <code class="docutils literal notranslate"><span class="pre">None</span></code> for silhouette
+selection.</p></li>
+<li><p><strong>maximum_clusters</strong> (<em>int</em>) – Largest candidate cluster count.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em>) – Reproducibility seed for metric MDS.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Labels, selection scores, and MDS coordinates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#csaood.clustering.ClusteringResult" title="csaood.clustering.ClusteringResult">ClusteringResult</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.clustering.recursive_subcluster">
+<span class="sig-prename descclassname"><span class="pre">csaood.clustering.</span></span><span class="sig-name descname"><span class="pre">recursive_subcluster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_labels</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_subclusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_cluster_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linkage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.clustering.recursive_subcluster" title="Link to this definition"></a></dt>
+<dd><p>Recursively select subclusters within each parent cluster.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distance_matrix</strong> (<em>ndarray</em>) – Symmetric precomputed distance matrix.</p></li>
+<li><p><strong>top_labels</strong> (<em>ndarray</em>) – Top-level cluster assignment for every observation.</p></li>
+<li><p><strong>depth</strong> (<em>int</em>) – Number of nested subclustering levels. Zero returns no levels.</p></li>
+<li><p><strong>maximum_subclusters</strong> (<em>int</em>) – Largest candidate number of children per parent.</p></li>
+<li><p><strong>minimum_cluster_size</strong> (<em>int</em>) – Smallest admissible child cluster.</p></li>
+<li><p><strong>linkage</strong> (<em>str</em>) – Precomputed-distance agglomerative linkage.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>One array of hierarchical path labels for each requested depth.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<em>ndarray</em>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.clustering.save_clustering_result">
+<span class="sig-prename descclassname"><span class="pre">csaood.clustering.</span></span><span class="sig-name descname"><span class="pre">save_clustering_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcluster_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.clustering.save_clustering_result" title="Link to this definition"></a></dt>
+<dd><p>Save clustering assignments and model-selection diagnostics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result</strong> (<a class="reference internal" href="#csaood.clustering.ClusteringResult" title="csaood.clustering.ClusteringResult"><em>ClusteringResult</em></a>) – Fitted clustering result.</p></li>
+<li><p><strong>file_names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – Waveform names in label order.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em> | </em><em>Path</em>) – Destination directory.</p></li>
+<li><p><strong>subcluster_labels</strong> (<em>list</em><em>[</em><em>ndarray</em><em>] </em><em>| </em><em>ndarray</em><em> | </em><em>None</em>) – Optional hierarchy arrays, one per nested level.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Assignment and score CSV paths.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, pathlib.Path]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-csaood.visualization">
+<span id="visualization"></span><h2>Visualization<a class="headerlink" href="#module-csaood.visualization" title="Link to this heading"></a></h2>
+<p>Colorblind-friendly manuscript visualizations.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.visualization.plot_alignment">
+<span class="sig-prename descclassname"><span class="pre">csaood.visualization.</span></span><span class="sig-name descname"><span class="pre">plot_alignment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moving</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.visualization.plot_alignment" title="Link to this definition"></a></dt>
+<dd><p>Plot one channel before and after cyclic alignment.</p>
+<p>The function never forces a Matplotlib backend. It returns the figure so
+notebooks can display it and server scripts can save it headlessly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference</strong> (<em>ndarray</em>) – Reference waveform with shape <code class="docutils literal notranslate"><span class="pre">(samples,)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">(samples,</span> <span class="pre">channels)</span></code>.</p></li>
+<li><p><strong>moving</strong> (<em>ndarray</em>) – Unaligned waveform with the same shape as <code class="docutils literal notranslate"><span class="pre">reference</span></code>.</p></li>
+<li><p><strong>result</strong> (<em>AlignmentResult</em>) – Alignment result containing the aligned moving waveform.</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Channel index to display.</p></li>
+<li><p><strong>channel_name</strong> (<em>str</em><em> | </em><em>None</em>) – Optional human-readable channel label.</p></li>
+<li><p><strong>sampling_frequency</strong> (<em>float</em><em> | </em><em>None</em>) – Samples per second. If omitted, the horizontal
+axis uses sample indices.</p></li>
+<li><p><strong>output_path</strong> (<em>str</em><em> | </em><em>Path</em><em> | </em><em>None</em>) – Optional destination for a 300-DPI PNG or other
+Matplotlib-supported format.</p></li>
+<li><p><strong>show</strong> (<em>bool</em>) – Whether to call <code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.show()</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The created two-panel figure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.visualization.plot_alignment_cost">
+<span class="sig-prename descclassname"><span class="pre">csaood.visualization.</span></span><span class="sig-name descname"><span class="pre">plot_alignment_cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.visualization.plot_alignment_cost" title="Link to this definition"></a></dt>
+<dd><p>Plot alignment cost against the signed candidate offset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result</strong> (<em>AlignmentResult</em>) – Alignment result containing <code class="docutils literal notranslate"><span class="pre">offsets</span></code> and <code class="docutils literal notranslate"><span class="pre">cost_curve</span></code>.</p></li>
+<li><p><strong>output_path</strong> (<em>str</em><em> | </em><em>Path</em><em> | </em><em>None</em>) – Optional figure destination.</p></li>
+<li><p><strong>show</strong> (<em>bool</em>) – Whether to display the figure interactively.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The alignment-cost figure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.visualization.plot_cluster_scores">
+<span class="sig-prename descclassname"><span class="pre">csaood.visualization.</span></span><span class="sig-name descname"><span class="pre">plot_cluster_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.visualization.plot_cluster_scores" title="Link to this definition"></a></dt>
+<dd><p>Plot silhouette score against the number of clusters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scores</strong> – Table containing <code class="docutils literal notranslate"><span class="pre">cluster_count</span></code> and <code class="docutils literal notranslate"><span class="pre">silhouette</span></code> columns.</p></li>
+<li><p><strong>output_path</strong> (<em>str</em><em> | </em><em>Path</em><em> | </em><em>None</em>) – Optional figure destination.</p></li>
+<li><p><strong>show</strong> (<em>bool</em>) – Whether to display the figure interactively.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cluster-count diagnostic figure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.visualization.plot_distance_heatmap">
+<span class="sig-prename descclassname"><span class="pre">csaood.visualization.</span></span><span class="sig-name descname"><span class="pre">plot_distance_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance_matrix</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.visualization.plot_distance_heatmap" title="Link to this definition"></a></dt>
+<dd><p>Plot a precomputed distance matrix without red-green encoding.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distance_matrix</strong> (<em>ndarray</em>) – Square pairwise distance matrix.</p></li>
+<li><p><strong>output_path</strong> (<em>str</em><em> | </em><em>Path</em><em> | </em><em>None</em>) – Optional figure destination.</p></li>
+<li><p><strong>show</strong> (<em>bool</em>) – Whether to display the figure interactively.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The heatmap figure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.visualization.style_axes">
+<span class="sig-prename descclassname"><span class="pre">csaood.visualization.</span></span><span class="sig-name descname"><span class="pre">style_axes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.visualization.style_axes" title="Link to this definition"></a></dt>
+<dd><p>Apply the package’s manuscript axis style.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>axis</strong> – Matplotlib axis to style in place.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-csaood.io">
+<span id="input-and-output"></span><h2>Input and output<a class="headerlink" href="#module-csaood.io" title="Link to this heading"></a></h2>
+<p>Input and output utilities for waveform collections.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.io.load_csv_signals">
+<span class="sig-prename descclassname"><span class="pre">csaood.io.</span></span><span class="sig-name descname"><span class="pre">load_csv_signals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_names</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.io.load_csv_signals" title="Link to this definition"></a></dt>
+<dd><p>Load selected numeric channels from a folder of CSV waveforms.</p>
+<p>Tag or label columns are never inspected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dir</strong> (<em>str</em><em> | </em><em>Path</em>) – Folder containing CSV files.</p></li>
+<li><p><strong>channel_names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – Ordered columns to load.</p></li>
+<li><p><strong>max_files</strong> (<em>int</em><em> | </em><em>None</em>) – Optional number of alphabetically sorted files to load.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Waveform arrays and their file names.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If no CSV files are available.</p></li>
+<li><p><strong>ValueError</strong> – If requested channels are absent or contain missing values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[list[<em>ndarray</em>], list[str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.io.load_distance_matrix">
+<span class="sig-prename descclassname"><span class="pre">csaood.io.</span></span><span class="sig-name descname"><span class="pre">load_distance_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.io.load_distance_matrix" title="Link to this definition"></a></dt>
+<dd><p>Load and validate a labeled precomputed distance matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em> | </em><em>Path</em>) – CSV containing matching row and column waveform labels.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Symmetrized matrix and waveform names.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[numpy.ndarray, list[str]]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the matrix is not square, finite, consistently labeled,
+    or nonnegative.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.io.save_distance_matrices">
+<span class="sig-prename descclassname"><span class="pre">csaood.io.</span></span><span class="sig-name descname"><span class="pre">save_distance_matrices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.io.save_distance_matrices" title="Link to this definition"></a></dt>
+<dd><p>Save global and per-channel distance and offset matrices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result</strong> (<em>DistanceMatrices</em>) – Pairwise matrix result.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em> | </em><em>Path</em>) – Destination folder.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mapping from output description to file path.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, <em>Path</em>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.io.trim_to_common_length">
+<span class="sig-prename descclassname"><span class="pre">csaood.io.</span></span><span class="sig-name descname"><span class="pre">trim_to_common_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signals</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.io.trim_to_common_length" title="Link to this definition"></a></dt>
+<dd><p>Trim a nonempty waveform collection to its shortest sample length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>signals</strong> (<em>list</em><em>[</em><em>ndarray</em><em>]</em>) – Waveform arrays whose first dimension represents samples.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Float32 arrays sharing a common sample length.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[numpy.ndarray]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">signals</span></code> is empty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-csaood.pipeline">
+<span id="high-level-pipeline"></span><h2>High-level pipeline<a class="headerlink" href="#module-csaood.pipeline" title="Link to this heading"></a></h2>
+<p>High-level distance and clustering workflows.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.pipeline.run_pipeline">
+<span class="sig-prename descclassname"><span class="pre">csaood.pipeline.</span></span><span class="sig-name descname"><span class="pre">run_pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_names</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cyclic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clustering</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'agglomerative'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linkage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcluster_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpu_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pair_direction_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'one_way'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">alignment_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.pipeline.run_pipeline" title="Link to this definition"></a></dt>
+<dd><p>Run pairwise distances, default clustering, and standard diagnostics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dir</strong> – CSV input folder.</p></li>
+<li><p><strong>output_dir</strong> – Root result folder.</p></li>
+<li><p><strong>channel_names</strong> – Selected numeric waveform columns.</p></li>
+<li><p><strong>method</strong> – One of the five public alignment methods.</p></li>
+<li><p><strong>clustering</strong> – <code class="docutils literal notranslate"><span class="pre">agglomerative</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">mds_ward</span></code>.</p></li>
+<li><p><strong>cluster_count</strong> – Fixed number of clusters, or <code class="docutils literal notranslate"><span class="pre">None</span></code> for silhouette
+selection.</p></li>
+<li><p><strong>maximum_clusters</strong> – Largest candidate cluster count.</p></li>
+<li><p><strong>linkage</strong> – Agglomerative linkage for precomputed distances.</p></li>
+<li><p><strong>recursive</strong> – Whether to assign one additional subclustering level.
+Enabled by default to match the iterative hierarchical workflow.</p></li>
+<li><p><strong>subcluster_depth</strong> – Number of nested within-cluster levels. The default
+is one; zero disables nested subclustering.</p></li>
+<li><p><strong>embedding_dimensions</strong> – Number of metric-MDS coordinates used before
+optional Ward clustering.</p></li>
+<li><p><strong>gpu_ids</strong> – <code class="docutils literal notranslate"><span class="pre">auto</span></code>, <code class="docutils literal notranslate"><span class="pre">cpu</span></code>, a comma-separated string, or GPU IDs.</p></li>
+<li><p><strong>max_files</strong> – Optional number of sorted CSV files to use.</p></li>
+<li><p><strong>pair_direction_mode</strong> – <code class="docutils literal notranslate"><span class="pre">one_way</span></code> or <code class="docutils literal notranslate"><span class="pre">bidirectional_min</span></code>.</p></li>
+<li><p><strong>**alignment_kwargs</strong> – Method-specific alignment settings.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple of distance-matrix and clustering results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="publications.html" class="btn btn-neutral float-left" title="Publications and contributors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
