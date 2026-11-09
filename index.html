@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CSAOOD documentation &mdash; CSAOOD 0.1.0 documentation</title>
+  <title>CSAOOD documentation &mdash; CSAOOD 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=2caa9db7"></script>
+      <script src="_static/documentation_options.js?v=1be0d999"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -94,6 +94,7 @@ observations without using event labels or event-region tags.</p>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#method-3-fft-alignment-on-original-signals">Method 3: FFT alignment on original signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#method-4-fft-alignment-on-differences">Method 4: FFT alignment on differences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#method-5-no-alignment">Method 5: no alignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#method-6-fast-transient-activity-cyclic-alignment">Method 6: Fast Transient-Activity Cyclic Alignment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#offset-convention">Offset convention</a></li>
 </ul>
 </li>
@@ -106,6 +107,7 @@ observations without using event labels or event-region tags.</p>
 <li class="toctree-l1"><a class="reference internal" href="command_line.html">Command line</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="command_line.html#trend-corrected-example">Trend-corrected example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="command_line.html#fft-difference-example">FFT-difference example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#fast-transient-activity-example">Fast transient-activity example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="command_line.html#unified-command">Unified command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="command_line.html#saved-outputs">Saved outputs</a></li>
 </ul>
@@ -113,6 +115,7 @@ observations without using event labels or event-region tags.</p>
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Example notebooks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks.html#trend-corrected-example">Trend-corrected example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks.html#fft-difference-example">FFT-difference example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks.html#fast-transient-activity-example">Fast transient-activity example</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="publications.html">Publications and contributors</a><ul>
@@ -138,6 +141,7 @@ observations without using event labels or event-region tags.</p>
 <ul class="simple">
 <li><p>Positive offsets always mean a right shift, following <code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.roll()</span></code>.</p></li>
 <li><p>Trend correction is evaluated before scoring every candidate offset.</p></li>
+<li><p>Transient-activity alignment evaluates correction before its activity cost.</p></li>
 <li><p>No tag column is read by the package.</p></li>
 <li><p>Agglomerative clustering on precomputed distances is the default.</p></li>
 <li><p>Plot functions do not force a backend, so they work in notebooks and on

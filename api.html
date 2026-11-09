@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API reference &mdash; CSAOOD 0.1.0 documentation</title>
+  <title>API reference &mdash; CSAOOD 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=2caa9db7"></script>
+      <script src="_static/documentation_options.js?v=1be0d999"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -55,6 +55,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#csaood.alignment.build_offsets"><code class="docutils literal notranslate"><span class="pre">build_offsets()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#csaood.alignment.exhaustive_align"><code class="docutils literal notranslate"><span class="pre">exhaustive_align()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#csaood.alignment.fft_align"><code class="docutils literal notranslate"><span class="pre">fft_align()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csaood.alignment.transient_activity_align"><code class="docutils literal notranslate"><span class="pre">transient_activity_align()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-csaood.corrections">Edge correction</a><ul>
@@ -138,7 +139,7 @@ moving waveform to the right, as in <code class="docutils literal notranslate"><
 <li><p><strong>reference</strong> (<em>ndarray</em><em> | </em><em>Tensor</em>) – Reference waveform.</p></li>
 <li><p><strong>moving</strong> (<em>ndarray</em><em> | </em><em>Tensor</em>) – Waveform to align.</p></li>
 <li><p><strong>method</strong> (<em>str</em><em> | </em><em>AlignmentMethod</em>) – One of <code class="docutils literal notranslate"><span class="pre">cyclic</span></code>, <code class="docutils literal notranslate"><span class="pre">trend_corrected</span></code>, <code class="docutils literal notranslate"><span class="pre">fft_original</span></code>,
-<code class="docutils literal notranslate"><span class="pre">fft_difference</span></code>, or <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">fft_difference</span></code>, <code class="docutils literal notranslate"><span class="pre">transient_activity</span></code>, or <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
 <li><p><strong>**kwargs</strong> – Method-specific keyword arguments.</p></li>
 </ul>
 </dd>
@@ -236,6 +237,43 @@ moving waveform shifted by the offset estimated from its differences.</p>
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="csaood.alignment.transient_activity_align">
+<span class="sig-prename descclassname"><span class="pre">csaood.alignment.</span></span><span class="sig-name descname"><span class="pre">transient_activity_align</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moving</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fast_symmetric'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'squared'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activity_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correction_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">CorrectionMode.WHOLE_WRAPPED_LEVEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correction_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset_chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_aligned</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_cost_curve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.alignment.transient_activity_align" title="Link to this definition"></a></dt>
+<dd><p>Align waveforms by correction-aware transient-activity comparison.</p>
+<p>The method compares normalized rolling absolute first differences over the
+complete record. It evaluates exactly the pipeline <code class="docutils literal notranslate"><span class="pre">cyclic</span> <span class="pre">shift</span> <span class="pre">-&gt;</span>
+<span class="pre">constant</span> <span class="pre">wrapped-segment</span> <span class="pre">correction</span> <span class="pre">-&gt;</span> <span class="pre">transient</span> <span class="pre">activity</span> <span class="pre">-&gt;</span> <span class="pre">cost</span></code>. The
+fast evaluator precomputes circular differences and rolling activity, then
+updates only the finite-record boundaries and the offset-specific splice
+neighborhood.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference</strong> (<em>ndarray</em><em> | </em><em>Tensor</em>) – Reference waveform with shape <code class="docutils literal notranslate"><span class="pre">(samples,</span> <span class="pre">channels)</span></code>.</p></li>
+<li><p><strong>moving</strong> (<em>ndarray</em><em> | </em><em>Tensor</em>) – Waveform to align to <code class="docutils literal notranslate"><span class="pre">reference</span></code>.</p></li>
+<li><p><strong>offset_step</strong> (<em>int</em>) – Spacing between candidate shifts.</p></li>
+<li><p><strong>search_type</strong> (<em>str</em>) – Candidate offset range; see <a class="reference internal" href="#csaood.alignment.build_offsets" title="csaood.alignment.build_offsets"><code class="xref py py-func docutils literal notranslate"><span class="pre">build_offsets()</span></code></a>.</p></li>
+<li><p><strong>cost</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">squared</span></code> or <code class="docutils literal notranslate"><span class="pre">absolute</span></code> activity-space cost.</p></li>
+<li><p><strong>activity_window</strong> (<em>int</em>) – Rolling window applied to absolute first differences.</p></li>
+<li><p><strong>correction_mode</strong> (<em>str</em><em> | </em><em>CorrectionMode</em>) – Constant wrapped-segment correction strategy.</p></li>
+<li><p><strong>correction_window</strong> (<em>int</em>) – Local level-estimation window.</p></li>
+<li><p><strong>offset_chunk_size</strong> (<em>int</em>) – Candidate offsets evaluated in one batch.</p></li>
+<li><p><strong>return_aligned</strong> (<em>bool</em>) – Whether to return the complete corrected waveform.</p></li>
+<li><p><strong>return_cost_curve</strong> (<em>bool</em>) – Whether to return every candidate offset and cost.</p></li>
+<li><p><strong>device</strong> (<em>str</em><em> | </em><em>device</em><em> | </em><em>None</em>) – Torch device.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Alignment result containing shared and independently optimal
+channel-specific transient-activity distances and offsets.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>AlignmentResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-csaood.corrections">
 <span id="edge-correction"></span><h2>Edge correction<a class="headerlink" href="#module-csaood.corrections" title="Link to this heading"></a></h2>
@@ -245,15 +283,12 @@ moving waveform shifted by the offset estimated from its differences.</p>
 <span class="sig-prename descclassname"><span class="pre">csaood.corrections.</span></span><span class="sig-name descname"><span class="pre">apply_level_correction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shifted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signed_shift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">CorrectionMode.WHOLE_WRAPPED_LEVEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csaood.corrections.apply_level_correction" title="Link to this definition"></a></dt>
 <dd><p>Correct the level discontinuity created by a cyclic shift.</p>
 <p>The input must already equal <code class="docutils literal notranslate"><span class="pre">torch.roll(moving,</span> <span class="pre">signed_shift,</span> <span class="pre">dims=0)</span></code>.
-The cyclic shift is represented as a right shift of
-<code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">signed_shift</span> <span class="pre">mod</span> <span class="pre">M</span></code> samples, so the first <code class="docutils literal notranslate"><span class="pre">h</span></code> observations form the
-wrapped segment and the splice lies between indices <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">-</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">h</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">whole_wrapped_level</span></code> estimates the wrapped level from all first <code class="docutils literal notranslate"><span class="pre">h</span></code>
-samples. <code class="docutils literal notranslate"><span class="pre">local_seam_level</span></code> estimates it from at most <code class="docutils literal notranslate"><span class="pre">window</span></code> samples
-immediately before the splice. Both modes estimate the leading level from
-at most <code class="docutils literal notranslate"><span class="pre">window</span></code> samples immediately after the splice. The resulting
-constant is added to the complete wrapped prefix. No slope or taper is
-introduced.</p>
+A positive shift wraps a prefix from the right endpoint; a negative shift
+wraps a suffix from the left endpoint. <code class="docutils literal notranslate"><span class="pre">whole_wrapped_level</span></code> estimates
+the wrapped level from that complete physically wrapped segment, whereas
+<code class="docutils literal notranslate"><span class="pre">local_seam_level</span></code> uses at most <code class="docutils literal notranslate"><span class="pre">window</span></code> wrapped samples beside the
+splice. Both modes estimate the unwrapped-side level from the adjacent
+local window. No slope or taper is introduced.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -711,7 +746,7 @@ Matplotlib-supported format.</p></li>
 <li><p><strong>input_dir</strong> – CSV input folder.</p></li>
 <li><p><strong>output_dir</strong> – Root result folder.</p></li>
 <li><p><strong>channel_names</strong> – Selected numeric waveform columns.</p></li>
-<li><p><strong>method</strong> – One of the five public alignment methods.</p></li>
+<li><p><strong>method</strong> – One of the six public alignment methods.</p></li>
 <li><p><strong>clustering</strong> – <code class="docutils literal notranslate"><span class="pre">agglomerative</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">mds_ward</span></code>.</p></li>
 <li><p><strong>cluster_count</strong> – Fixed number of clusters, or <code class="docutils literal notranslate"><span class="pre">None</span></code> for silhouette
 selection.</p></li>

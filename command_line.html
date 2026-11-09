@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Command line &mdash; CSAOOD 0.1.0 documentation</title>
+  <title>Command line &mdash; CSAOOD 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=2caa9db7"></script>
+      <script src="_static/documentation_options.js?v=1be0d999"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -50,6 +50,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Command line</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#trend-corrected-example">Trend-corrected example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#fft-difference-example">FFT-difference example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fast-transient-activity-example">Fast transient-activity example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#unified-command">Unified command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#saved-outputs">Saved outputs</a></li>
 </ul>
@@ -111,12 +112,30 @@
   <span class="p">-</span><span class="n">-fft-cost-normalization</span> <span class="n">squared_sum</span>
 </pre></div>
 </div>
+</section>
+<section id="fast-transient-activity-example">
+<h2>Fast transient-activity example<a class="headerlink" href="#fast-transient-activity-example" title="Link to this heading"></a></h2>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">run_scripts</span><span class="p">\</span><span class="n">run_method6_transient_activity</span><span class="p">.</span><span class="n">py</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-input-dir</span> <span class="n">input_files</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-output-dir</span> <span class="n">results</span><span class="p">\</span><span class="n">transient_activity</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-channels</span> <span class="n">magnetic_field_strength_T2</span><span class="p">-</span><span class="n">2_X</span> <span class="n">magnetic_field_strength_T2</span><span class="p">-</span><span class="n">2_Y</span> <span class="n">magnetic_field_strength_T2</span><span class="p">-</span><span class="n">2_Z</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-offset-step</span> <span class="n">100</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-search-type</span> <span class="n">fast_symmetric</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-activity-window</span> <span class="n">500</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-correction-mode</span> <span class="n">whole_wrapped_level</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-correction-window</span> <span class="n">1000</span> <span class="p">`</span>
+  <span class="p">-</span><span class="n">-gpu-ids</span> <span class="n">auto</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--activity-window</span></code> controls the neighborhood over which absolute first
+differences are aggregated. It is distinct from <code class="docutils literal notranslate"><span class="pre">--correction-window</span></code>, which
+controls local level estimation at the wrap splice.</p>
 <p>Omit <code class="docutils literal notranslate"><span class="pre">--clusters</span></code> to select the cluster count by silhouette score. Supplying
 <code class="docutils literal notranslate"><span class="pre">--clusters</span> <span class="pre">K</span></code> fixes the top-level count at <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p>
 </section>
 <section id="unified-command">
 <h2>Unified command<a class="headerlink" href="#unified-command" title="Link to this heading"></a></h2>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">-m</span> <span class="n">csaood</span> <span class="p">-</span><span class="n">-method</span> <span class="n">fft_original</span> <span class="p">-</span><span class="n">-channels</span> <span class="n">sensor_x</span> <span class="n">sensor_y</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">-m</span> <span class="n">csaood</span> <span class="p">-</span><span class="n">-method</span> <span class="n">transient_activity</span> <span class="p">-</span><span class="n">-channels</span> <span class="n">sensor_x</span> <span class="n">sensor_y</span>
 </pre></div>
 </div>
 <p>Results are placed under <code class="docutils literal notranslate"><span class="pre">results/&lt;method&gt;</span></code> unless <code class="docutils literal notranslate"><span class="pre">--output-dir</span></code> is supplied.</p>

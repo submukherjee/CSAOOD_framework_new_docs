@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example notebooks &mdash; CSAOOD 0.1.0 documentation</title>
+  <title>Example notebooks &mdash; CSAOOD 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=2caa9db7"></script>
+      <script src="_static/documentation_options.js?v=1be0d999"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -51,6 +51,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Example notebooks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#trend-corrected-example">Trend-corrected example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#fft-difference-example">FFT-difference example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fast-transient-activity-example">Fast transient-activity example</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="publications.html">Publications and contributors</a></li>
@@ -84,11 +85,12 @@
 <h1>Example notebooks<a class="headerlink" href="#example-notebooks" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">examples/</span></code> folder contains:</p>
 <ul class="simple">
-<li><p>a method-selector notebook with a five-choice dropdown;</p></li>
+<li><p>a method-selector notebook with a six-choice dropdown;</p></li>
 <li><p>exhaustive cyclic two-signal alignment;</p></li>
 <li><p>trend-corrected two-signal alignment;</p></li>
 <li><p>FFT alignment on original signals;</p></li>
 <li><p>FFT alignment on lag-differenced signals.</p></li>
+<li><p>fast transient-activity cyclic alignment.</p></li>
 </ul>
 <p>Each alignment notebook plots one selected channel before and after alignment
 using the same bold, colorblind-friendly manuscript style. The selected
@@ -105,6 +107,14 @@ alignment of the lag-differenced waveforms, and the cyclic cost curve.</p>
 <section id="fft-difference-example">
 <h2>FFT-difference example<a class="headerlink" href="#fft-difference-example" title="Link to this heading"></a></h2>
 <p><img alt="FFT-difference alignment" src="_images/fft_difference_signal_alignment.png" /></p>
+</section>
+<section id="fast-transient-activity-example">
+<h2>Fast transient-activity example<a class="headerlink" href="#fast-transient-activity-example" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">05_transient_activity_two_signals.ipynb</span></code> estimates one shared offset from the
+three selected magnetic-field channels, while the plot below displays only
+<code class="docutils literal notranslate"><span class="pre">magnetic_field_strength_T2-2_X</span></code>.</p>
+<p><img alt="Fast transient-activity alignment" src="_images/transient_activity_alignment.png" /></p>
+<p><img alt="Fast transient-activity cost curve" src="_images/transient_activity_cost_curve.png" /></p>
 </section>
 </section>
 
